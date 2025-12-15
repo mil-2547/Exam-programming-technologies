@@ -26,7 +26,7 @@ $(BINDIR)/$(TARGET): $(OBJ)
 	@echo "[LD] Linking $@"
 	$(CXX) $(OBJ) -o $@ $(LDFLAGS)
 
-TEST_SRC := src/test.cpp
+TEST_SRC := tests/test.cpp
 TEST_OBJ := $(OBJDIR)/test.o
 
 build-tests: $(BINDIR)/Test
@@ -35,7 +35,7 @@ $(BINDIR)/Test: $(TEST_OBJ) $(OBJ)
 	@mkdir -p $(BINDIR)
 	$(CXX) $(TEST_OBJ) $(OBJ) -o $@ $(LDFLAGS) $(GTFLAGS)
 	
-$(OBJDIR)/test.o: src/test.cpp $(PCH)
+$(OBJDIR)/test.o: test/test.cpp $(PCH)
 	@mkdir -p $(OBJDIR)
 	@echo "[CC][TEST] $<"
 	$(CXX) $(CXXFLAGS) -c $< -o $@
