@@ -35,7 +35,7 @@ $(BINDIR)/Test: $(TEST_OBJ) $(OBJ)
 	@mkdir -p $(BINDIR)
 	$(CXX) $(TEST_OBJ) $(OBJ) -o $@ $(LDFLAGS) $(GTFLAGS)
 	
-$(OBJDIR)/test.o: test/test.cpp $(PCH)
+$(OBJDIR)/test.o: tests/test.cpp $(PCH)
 	@mkdir -p $(OBJDIR)
 	@echo "[CC][TEST] $<"
 	$(CXX) $(CXXFLAGS) -c $< -o $@
