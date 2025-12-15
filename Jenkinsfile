@@ -60,7 +60,7 @@ pipeline {
         stage('Install docker') {
             steps {
                 sh '''
-                    apk add --no-cache docker
+					apt-get update && apt-get install -y --no-install-recommends docker
                 '''
             }
         }
