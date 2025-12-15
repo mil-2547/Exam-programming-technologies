@@ -5,6 +5,7 @@ pipeline {
             args '''
               -v ccache-vol:/ccache
               -v $WORKSPACE/pch:/pch
+			  -v /var/run/docker.sock:/var/run/docker.sock
             '''
         }
     }
