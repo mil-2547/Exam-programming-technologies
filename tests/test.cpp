@@ -22,5 +22,8 @@ TEST(ChooseMemberOfAPTest, NegativeNumbers) {
 }
 
 TEST(ChooseMemberOfAPTest, NegativeChoice) {
-  EXPECT_NEQ(choose_member_of_ap(-1, -2, -2), 123); // -1 + (3-1)*(-2) = -5
+  EXPECT_THROW(
+    choose_member_of_ap(-1, -2, -2),
+    std::invalid_argument
+  );
 }
