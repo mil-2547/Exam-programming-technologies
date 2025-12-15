@@ -5,7 +5,7 @@
 #define STEP 2
 
 int main() {
-  crow::SimpleApp app = crow_init();
+  crow::SimpleApp app;
   
   CROW_ROUTE(app, "/<int>")
   ([](int n){
