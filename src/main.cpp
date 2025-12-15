@@ -8,7 +8,7 @@ int main() {
   crow::SimpleApp app;
 
   CROW_ROUTE(app, "/")([](){
-      return "MIKHAIL Melik-Kazarian";
+      return "MIKHAIL Melik-Kazarian | Hello";
   });
   
   CROW_ROUTE(app, "/<int>")
