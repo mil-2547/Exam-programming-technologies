@@ -1,3 +1,3 @@
 #pragma once
 
-long long int choose_member_of_ap(int first, int step, unsigned int n);
+long long choose_member_of_ap(long long first, long long step, long long n);
