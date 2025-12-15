@@ -19,6 +19,11 @@ pipeline {
         DOCKER_CREDS_ID  = 'dockerhub-creds'
     }
 
+	triggers {
+		cron('H/30 * * * *')      // Періодично
+        pollSCM('H/10 * * * *') // Опитування SCM
+    }
+
     stages {
         stage('Check SCM') {
             steps {
