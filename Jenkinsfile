@@ -58,14 +58,7 @@ pipeline {
                 archiveArtifacts artifacts: 'build/bin/crow_app', fingerprint: true
             }
         }
-        stage('Install docker') {
-            steps {
-                sh '''
-					apt-get update && apt-get install -y --no-install-recommends docker.io
-                '''
-            }
-        }
-		    stage('Build Docker Image') {
+		stage('Build Docker Image') {
             steps {
                 script {
                     sh 'docker build -t ${DOCKER_IMAGE}:${BUILD_NUMBER} .'
