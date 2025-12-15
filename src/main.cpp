@@ -6,6 +6,10 @@
 
 int main() {
   crow::SimpleApp app;
+
+  CROW_ROUTE(app, "/")([](){
+      return "Mikhail Melik-Kazarian";
+  });
   
   CROW_ROUTE(app, "/<int>")
   ([](int n){
