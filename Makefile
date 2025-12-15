@@ -11,6 +11,10 @@ OBJDIR := build/obj
 BINDIR := build/bin
 OBJ    := $(patsubst src/%.cpp,$(OBJDIR)/%.o,$(SRC))
 
+# Separate app main from shared objects (assuming src/main.cpp exists; adjust if named differently)
+APP_MAIN_OBJ := $(OBJDIR)/main.o
+SHARED_OBJ := $(filter-out $(APP_MAIN_OBJ), $(OBJ))
+
 pch: $(PCH)
 $(PCH): include/pch.h
 	@echo "[PCH] Building precompiled header..."
@@ -21,19 +25,19 @@ $(OBJDIR)/%.o: src/%.cpp $(PCH)
 	@echo "[CC] $<"
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
-$(BINDIR)/$(TARGET): $(OBJ)
+$(BINDIR)/$(TARGET): $(APP_MAIN_OBJ) $(SHARED_OBJ)
 	@mkdir -p $(BINDIR)
 	@echo "[LD] Linking $@"
-	$(CXX) $(OBJ) -o $@ $(LDFLAGS)
+	$(CXX) $(APP_MAIN_OBJ) $(SHARED_OBJ) -o $@ $(LDFLAGS)
 
 TEST_SRC := tests/test.cpp
 TEST_OBJ := $(OBJDIR)/test.o
 
 build-tests: $(BINDIR)/Test
 
-$(BINDIR)/Test: $(TEST_OBJ) $(OBJ)
+$(BINDIR)/Test: $(TEST_OBJ) $(SHARED_OBJ)
 	@mkdir -p $(BINDIR)
-	$(CXX) $(TEST_OBJ) $(OBJ) -o $@ $(LDFLAGS) $(GTFLAGS)
+	$(CXX) $(TEST_OBJ) $(SHARED_OBJ) -o $@ $(LDFLAGS) $(GTFLAGS)
 	
 $(OBJDIR)/test.o: tests/test.cpp $(PCH)
 	@mkdir -p $(OBJDIR)
