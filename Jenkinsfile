@@ -1,7 +1,7 @@
 pipeline {
     agent {
         docker {
-            image 'my-gcc-ccache:latest'
+            image 'artiprice/my-gcc-ccache:latest'
             args '''
               -v ccache-vol:/ccache
               -v $WORKSPACE/pch:/pch
