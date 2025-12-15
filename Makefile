@@ -1,6 +1,7 @@
 CXX      := g++
-CXXFLAGS ?= -std=c++20 -O3 -Wall -Wextra -pipe -march=x86-64 -Iinclude/vendors/asio/include -Iinclude
+CXXFLAGS ?= -std=c++20 -O3 -Wall -Wextra -pipe -march=x86-64 -Iinclude/vendors/asio/include -Iinclude/vendors/googletest/include -Iinclude
 LDFLAGS  ?= -static -pthread
+GTFLAGS  ?= -L/googletest/lib -lgtest -lgtest_main
 
 TARGET := crow_app
 PCH    := /pch/pch.h.gch
@@ -29,7 +30,7 @@ TEST_SRC := src/test.cpp
 TEST_OBJ := $(OBJDIR)/test.o
 $(BINDIR)/Test: $(TEST_OBJ) $(OBJ)
 	@mkdir -p $(BINDIR)
-	$(CXX) $(TEST_OBJ) $(OBJ) -o $@ $(LDFLAGS)
+	$(CXX) $(TEST_OBJ) $(OBJ) -o $@ $(LDFLAGS) $(GTFLAGS)
 build-tests: $(BINDIR)/Test
 
 all: $(BINDIR)/$(TARGET)
