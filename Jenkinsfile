@@ -49,7 +49,6 @@ pipeline {
                     steps {
                         sh 'make pch'
                         sh 'make all'
-                        sh 'ccache -s'
                     }
                 }
                 stage('Archive') {
