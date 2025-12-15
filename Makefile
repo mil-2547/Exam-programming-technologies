@@ -1,7 +1,7 @@
 CXX      := g++
 CXXFLAGS ?= -std=c++20 -O3 -Wall -Wextra -pipe -march=x86-64 -Iinclude/vendors/asio/include -Iinclude/vendors/googletest/include -Iinclude
 LDFLAGS  ?= -static -pthread
-GTFLAGS  ?= -L/googletest/lib -lgtest -lgtest_main
+GTFLAGS  ?= -L/include/vendors/googletest/lib -lgtest -lgtest_main
 
 TARGET := crow_app
 PCH    := /pch/pch.h.gch
