@@ -5,6 +5,7 @@ pipeline {
             args '''
               -v ccache-vol:/ccache
               -v $WORKSPACE/pch:/pch
+			  -u root:root -v /var/run/docker.sock:/var/run/docker.sock
 			  -v /var/run/docker.sock:/var/run/docker.sock
             '''
         }
@@ -61,6 +62,13 @@ pipeline {
         stage('Archive') {
             steps {
                 archiveArtifacts artifacts: 'build/bin/crow_app', fingerprint: true
+            }
+        }
+		stage('Install docker') {
+            steps {
+                sh '''
+					apt-get update && apt-get install -y --no-install-recommends docker.io
+                '''
             }
         }
 		stage('Build Docker Image') {
