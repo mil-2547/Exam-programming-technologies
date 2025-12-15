@@ -7,7 +7,7 @@ pipeline {
         CCACHE_NOHASHDIR = 'true'
         CXX              = 'g++'
         DOCKER_IMAGE     = 'artiprice/exam'
-        DOCKER_CREDS_ID  = 'dockerhub-creds'
+        DOCKER_CREDS_ID  = 'dockerhub-credentials'
     }
 
     triggers {
@@ -67,8 +67,8 @@ pipeline {
                 stage('Build Docker Image') {
                     steps {
                         script {
-                            sh "docker build -t ${DOCKER_IMAGE}:${BUILD_NUMBER} ."
-                            sh "docker tag ${DOCKER_IMAGE}:${BUILD_NUMBER} ${DOCKER_IMAGE}:latest"
+                            sh 'docker build -t ${DOCKER_IMAGE}:${BUILD_NUMBER} .'
+                            sh 'docker tag ${DOCKER_IMAGE}:${BUILD_NUMBER} ${DOCKER_IMAGE}:latest'
                         }
                     }
                 }
@@ -77,8 +77,8 @@ pipeline {
                         script {
                             withCredentials([usernamePassword(credentialsId: DOCKER_CREDS_ID, passwordVariable: 'DOCKER_PASS', usernameVariable: 'DOCKER_USER')]) {
                                 sh 'echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin'
-                                sh "docker push ${DOCKER_IMAGE}:${BUILD_NUMBER}"
-                                sh "docker push ${DOCKER_IMAGE}:latest"
+                                sh 'docker push ${DOCKER_IMAGE}:${BUILD_NUMBER}'
+                                sh 'docker push ${DOCKER_IMAGE}:latest'
                             }
                         }
                     }
