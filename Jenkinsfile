@@ -24,6 +24,27 @@ pipeline {
                 checkout scm
             }
         }
+		stage('Build Tests') {
+            steps {
+                sh 'make build-tests'
+            }
+        }
+		stage('Run Tests') {
+			steps {
+				sh 'build/bin/Test --gtest_output=xml:./build/test-results/tests.xml'
+			}
+			post {
+				always {
+					junit 'build/test-results/tests.xml'
+				}
+				success {
+					echo 'application testing successfully completed'
+				}
+				failure {
+					echo 'Oh nooooo!!! Tests failed!'
+				}
+			}
+		}
         stage('Build') {
             steps {
                 sh 'make pch'
