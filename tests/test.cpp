@@ -20,3 +20,7 @@ TEST(ChooseMemberOfAPTest, NegativeNumbers) {
   EXPECT_EQ(choose_member_of_ap(-1, -2, 3), -5); // -1 + (3-1)*(-2) = -5
   EXPECT_EQ(choose_member_of_ap(-5, 3, 4), 4);   // -5 + (4-1)*3 = 4
 }
+
+TEST(ChooseMemberOfAPTest, NegativeChoice) {
+  EXPECT_NEQ(choose_member_of_ap(-1, -2, -2), 123); // -1 + (3-1)*(-2) = -5
+}
