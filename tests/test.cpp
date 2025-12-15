@@ -1,4 +1,5 @@
 #include <gtest/gtest.h>
+#include "../src/member_of_ap.hpp"
 
 TEST(ChooseMemberOfAPTest, NormalCases) {
   EXPECT_EQ(choose_member_of_ap(1, 2, 1), 1);  // result: first
