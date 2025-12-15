@@ -1,6 +1,6 @@
 FROM gcc:14
 
-RUN apt-get update && apt-get install -y --no-install-recommends ccache g++
+RUN apt-get update && apt-get install -y --no-install-recommends ccache g++ docker.io
 RUN rm -rf /var/lib/apt/lists/*
 
 ENV CCACHE_DIR=/ccache
@@ -11,3 +11,4 @@ ENV PATH=/usr/lib/ccache:$PATH
 WORKDIR /workspace
 
 CMD ["/bin/bash"]
+
