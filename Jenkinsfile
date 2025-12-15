@@ -60,7 +60,7 @@ pipeline {
         stage('Install docker') {
             steps {
                 sh '''
-					apt-get update && apt-get install -y --no-install-recommends docker
+					apt-get update && apt-get install -y --no-install-recommends docker.io
                 '''
             }
         }
